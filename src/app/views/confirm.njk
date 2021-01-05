@@ -1,0 +1,10 @@
+<script>
+    const deleteAction = document.querySelector('#form-delete')
+
+    deleteAction.addEventListener('submit', function (event) {
+        const confirmar = confirm('Deseja realmente apagar o dado?')
+        if (!confirmar) {
+            event.preventDefault()
+        }
+    })
+</script>

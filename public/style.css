@@ -1,0 +1,330 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+:root {
+    --primary-color: rgb(1, 221, 203);
+    --secondary-color: rgb(255, 240, 35);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--primary-color);
+}
+
+header {
+    background-color: white;
+    width: 100%;
+    padding: 30px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.links-header {
+    font-size: 20px;
+}
+
+/*margim apenas no elemento que tem a como antecedente e que seja um a*/
+
+.links-header a+a {
+    margin-left: 38px;
+}
+
+.links-header a {
+    text-decoration: none;
+    color: #777;
+    position: relative;
+}
+
+/*PAGINA SELECIONADA*/
+
+.links-header a.active {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/*BARRA DE CARREGAMENTO*/
+
+.links-header a::after {
+    content: "";
+    width: 0;
+    height: 2px;
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    background-color: var(--primary-color);
+}
+
+/*APARECENDO COM A BARRA DE CARREGAMENTO*/
+
+.links-header a:hover::after {
+    width: 100%;
+    transition: width 700ms ease-in-out;
+}
+
+/** CARDS **/
+
+.conteudo {
+    width: 650px;
+    min-height: 500px;
+    background-color: white;
+    margin: 32px auto;
+    display: grid;
+    grid-template-columns: 40% 60%;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+    animation-name: showCard;
+    animation-duration: 500ms;
+    animation-timing-function: ease-out;
+}
+
+@keyframes showCard {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.detalhes {
+    padding: 24px 24px 0 24px;
+}
+
+.detalhes .item div:first-child {
+    border-top: 1px solid rgb(201, 201, 201);
+    margin-top: 24px;
+}
+
+.detalhes .item div:nth-child(1), .detalhes h3 {
+    font-weight: normal;
+    color: #777;
+    letter-spacing: 0.5px;
+    font-size: 14px;
+}
+
+.detalhes .item div:nth-child(2) {
+    font-size: 16px;
+    color: #555;
+    margin-top: 8px;
+    font-weight: bold;
+}
+
+.detalhes h3 {
+    font-size: 18px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.detalhes .item span,
+.span-atuacao {
+    background-color: var(--secondary-color);
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #555;
+    border-radius: 16px;
+    margin-top: 10px;
+    display: inline-block;
+    text-transform: uppercase;
+    margin-right: 8px;
+}
+
+/** FORM **/
+
+.item input {
+    width: 100%;
+    outline: none;
+    font-size: 15px;
+    color: rgb(59, 59, 59);
+}
+
+input::placeholder {
+    color: rgb(59, 59, 59);
+    font-style: italic;
+}
+
+select, option {
+    color: rgb(59, 59, 59);
+    font-size: 15px;
+    outline: none;
+}
+
+button[type="submit"], a.submit {
+    margin-top: 32px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.8px;
+    cursor: pointer;
+}
+
+button[type="submit"], a.submit:hover {
+    background-color: rgb(3, 180, 166);
+    transition: 200ms;
+    outline: none;
+    margin-bottom: 12px;
+}
+
+a.submit {
+    color: white;
+    text-decoration: none;
+    display: block;
+    box-sizing: border-box;
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+#form-delete button {
+    background-color: red;
+    margin-top: 18px;
+    width: 100%;
+    margin-bottom: 18px;
+}
+
+#form-delete button:hover {
+    background-color: rgb(148, 6, 6);
+}
+
+.botoes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.botoes button {
+    width: 100%;
+    margin-top: 18px;
+    width: 100%;
+    margin-bottom: 18px;
+}
+
+.botoes button:hover {
+    background-color: var(--primary-color);
+}
+
+/**INDEX**/
+
+.container {
+    width: 650px;
+    min-height: 500px;
+    background-color: white;
+    margin: 32px auto;
+    text-align: center;
+    padding: 18px 18px;
+}
+
+table thead {
+    color: #777;
+    text-transform: uppercase;
+}
+
+table thead tr, tbody tr td {
+    padding: 12px 8px;
+    color: #555;
+    font-size: 16px;
+}
+thead tr th{
+text-align: center;
+}
+.btn-index,
+.botao-create{
+    background-color: var(--primary-color);
+    text-decoration: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+tbody tr td:first-child{
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    align-items: center;
+}
+tbody tr td span{
+    width: 40px;
+    height: 40px;
+    background-size: cover;
+    border-radius: 50%;
+    box-shadow: 3px 3px 5px -4px black;
+    border: 1px;
+}
+
+tbody tr td .span-atuacao{
+    display: inline;
+    
+}
+td, th{
+   border-bottom: 1px solid rgb(199, 199, 199);
+}
+
+tbody tr:last-child td{
+    border-bottom: none;
+}
+.botao-create{
+    display: block;
+    text-align: center;
+    width: 40px;
+    margin-bottom: 10px;
+}
+
+/* FILTROS */
+.header_teacher{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.header_teacher form{
+    display: grid;
+    grid-template-columns: 1fr 100px;
+    align-items: center;
+    column-gap: 10px;
+}
+.header_teacher form input{
+    border: 1px solid #eee;
+    padding: 10px;
+    outline: none;
+    align-items: center;
+    border-radius: 8px;
+
+}
+.header_teacher form button{
+    text-align: center;
+    margin: 0;
+}
+
+/*PAGINACAO*/
+.container{
+    display: grid;
+    grid-template: 64px 1fr 16px / 1fr;
+}
+.container .header_teacher{
+    margin: 0;
+    align-self: start;
+}
+.container .pagination{
+    margin: 0;
+    align-self: end;
+    justify-self: center;
+}
+.pagination a,
+.pagination span{
+    color: var(--primary-color);
+    text-decoration: none;
+    margin-right: 24px;
+}
+.pagination a:hover{
+    filter: brightness(0.3);
+    border-bottom: 1px solid var(--primary-color);
+}

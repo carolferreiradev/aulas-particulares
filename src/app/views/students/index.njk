@@ -1,0 +1,51 @@
+{% extends 'layout.njk' %}
+
+{% block content %}
+    <div class="container">
+
+    <div class="header_teacher">
+        <a class="botao-create" href="students/create">Novo</a>
+      <form action="/students" method="get">
+        <input 
+          type="text" 
+          name="filter"
+          placeholder="Nome ou email"
+          value={{filter}}
+        >
+        <button type="submit">Filtrar</button>
+      </form>
+    </div>
+        <table width="100%">
+            <thead>
+                <tr>
+                    <th>Nome Completo</th>
+                    <th>Email</th>
+                    <th>Ano escolar</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for student in students %}
+                    <tr>
+                        <td>
+                            <span style="background-image: url({{student.avatar_url}})"></span>
+                            {{student.name}}</td>
+                        <td>{{student.email}}</td>
+                        <td>{{student.ano_escolar}}</td>
+                        <td>
+                            <a class="btn-index" href="/students/{{student.id}}">VER</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+
+    <div class="pagination"
+    data-page = {{pagination.page}}
+    data-total = {{pagination.total}}
+    data-filter = {{filter}}>
+    </div>
+    </div>
+{% endblock content %}
