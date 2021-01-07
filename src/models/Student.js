@@ -37,51 +37,38 @@ module.exports = {
       callback(results.rows)
     })
   },
-}
+  paginate(params){
+    const {filter, limit, offset, callback} = params
 
- // delete(id, callback){
-  //   db.query(`
-  //   DELETE FROM students
-  //   WHERE id = $1 
-  //   `, [id], function(err, results){
-  //     if(err) throw `ERRO AO ACHAR O REGISTRO ${err}`
+    let query = "",
+      filterQuery = "",
+      totalQuery = `(
+        SELECT count(*) FROM STUDENTS
+      ) AS total`
 
-  //     callback()
-  //   })
-  // }, 
-
-  
-  // paginate(params){
-  //   const {filter, limit, offset, callback} = params
-
-  //   let query = "",
-  //     filterQuery = "",
-  //     totalQuery = `(
-  //       SELECT count(*) FROM STUDENTS
-  //     ) AS total`
-
-  //   //MANTENDO O FILTRO
-  //   if(filter){
-  //     filterQuery = `
-  //       WHERE students.name ILIKE '%${filter}%'
-  //       OR students.name ILIKE '%${filter}%'
-  //     `
-  //     totalQuery = `(
-  //       SELECT count(*) FROM students
-  //       ${filterQuery}
-  //     ) AS total`
-  //   }
+    //MANTENDO O FILTRO
+    if(filter){
+      filterQuery = `
+        WHERE students.name ILIKE '%${filter}%'
+        OR students.name ILIKE '%${filter}%'
+      `
+      totalQuery = `(
+        SELECT count(*) FROM students
+        ${filterQuery}
+      ) AS total`
+    }
     
-  //     query = `
-  //     SELECT students.*, ${totalQuery}
-  //     FROM students
-  //     ${filterQuery}
-  //     LIMIT $1
-  //     OFFSET $2
-  //     `
-  //     db.query(query, [limit, offset], function(err, results){
-  //       if(err) throw `Database error ${err}`
+      query = `
+      SELECT students.*, ${totalQuery}
+      FROM students
+      ${filterQuery}
+      LIMIT $1
+      OFFSET $2
+      `
+      db.query(query, [limit, offset], function(err, results){
+        if(err) throw `Database error ${err}`
 
-  //       callback(results.rows)
-  //     })
-  // }
+        callback(results.rows)
+      })
+  }
+}

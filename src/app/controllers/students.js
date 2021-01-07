@@ -107,11 +107,10 @@ module.exports = {
     })
 
     return res.redirect(`/students/${id}`)
-   
+
   },
-  delete(req, res) {
-    Student.delete(req.body.id, function (student) {
-      return res.redirect('/students')
-    })
+  async delete(req, res) {
+    await Student.delete(req.body.id)
+    return res.redirect('/students')
   },
 }

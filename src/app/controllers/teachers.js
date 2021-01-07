@@ -7,8 +7,9 @@ module.exports = {
     let { filter, page, limit } = req.query
 
     page = page || 1
-    limit = limit || 2
+    limit = limit || 5
     let offset = limit * (page - 1)
+
 
     const params = {
       filter,
@@ -103,9 +104,8 @@ module.exports = {
     return res.redirect(`/teachers/${id}`)
 
   },
-  delete(req, res) {
-    Teacher.delete(req.body.id, function () {
-      return res.redirect('/teachers')
-    })
-  },
+  async delete(req, res) {
+    await Teacher.delete(req.body.id)
+    return res.redirect('/teachers')
+  }
 }

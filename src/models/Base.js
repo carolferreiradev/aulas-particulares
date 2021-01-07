@@ -49,8 +49,16 @@ const Base = {
       console.error(`ERRO NO ARQUIVO BASE.JS > UPDATE: ${error}`)
     }
   },
-  // async delete() { },
-  // async paginate() { }
+  async delete(id) {
+    try {
+      await db.query(`
+      DELETE FROM ${this.table}
+      WHERE id = ${id}
+      `)
+    } catch (error) {
+      console.error(`ERRO NO ARQUIVO BASE.JS > DELETE: ${error}`)
+    }
+  }
 }
 
 module.exports = Base
