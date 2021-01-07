@@ -26,7 +26,7 @@ async function createTeacher() {
   const teacherIdsPromise = teachersList.map(teacher => TeachersModel.create(teacher))
   resultTeachers = await Promise.all(teacherIdsPromise) 
 }
-console.log(resultTeachers)
+
 async function createStudent() {
   let studentList = []
 
@@ -38,7 +38,7 @@ async function createStudent() {
       email: faker.internet.email(),
       ano_escolar: '5º Ano do Ensino Fundamental',
       carga_horaria: faker.random.number(33),
-      teacher_id: resultTeachers[Math.floor(Math.random() * resultTeachers)]
+      teacher_id: resultTeachers[Math.floor(Math.random() * totalTeachers)]
     })
   }
   const studentPromise = studentList.map(student => StudentsModel.create(student))
@@ -46,7 +46,7 @@ async function createStudent() {
 }
 async function init() {
   await createTeacher()
-  //await createStudent()
+  await createStudent()
 }
 
 init()
