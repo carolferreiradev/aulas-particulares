@@ -1,0 +1,25 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+    <div class="conteudo lottie">
+        <div class="success-lottie"></div>
+         <div class="content-lottie">
+        <p>Erro ao efetuar solicitação, tente novamente mais tarde</p>
+        
+        <a href="/">Clique aqui para retornar a página inicial</a>
+        </div>
+    </div>
+
+ <script src="/lottie.min.js"></script>
+<script>
+  const element = document.querySelector('.success-lottie')
+
+  lottie.loadAnimation({
+  container: element, // the dom element that will contain the animation
+  renderer: 'svg',
+  loop: true,
+  autoplay: true,
+  path: '/error.json' // the path to the animation json
+});
+</script>
+{% endblock content %}

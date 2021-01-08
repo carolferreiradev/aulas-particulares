@@ -362,3 +362,41 @@ tbody tr:last-child td {
         opacity: 0;
     }
 }
+
+/* MENSAGENS PARA O USUARIO */
+
+/* imagem json */
+
+.lottie {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.success-lottie {
+    width: 150px;
+    height: 150px;
+    padding: 4rem 0;
+}
+
+.content-lottie {
+    text-align: center;
+}
+
+.content-lottie p {
+    font-size: 24px;
+    margin-bottom: 2rem;
+}
+
+.content-lottie a {
+    text-decoration: none;
+    color:   rgb(5, 92, 85);
+    border: 1px solid  var(--primary-color);
+    padding: 0.4rem;
+    border-radius: 8px;
+    transition: 300ms ease-in-out;
+}
+.content-lottie a:hover{
+    background-color:   var(--primary-color);
+    color: white;
+}

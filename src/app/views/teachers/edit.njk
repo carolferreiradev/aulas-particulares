@@ -6,7 +6,7 @@
     <section>
       <div class="detalhes">
 
-        <form method="POST" action="/teachers?_method=PUT">
+        <form method="POST" action="/execution-sucess?_method=PUT">
           <h3>Editar cadastro</h3>
 
           {% include 'teachers/fields.njk'%}
@@ -14,11 +14,11 @@
           <input type="hidden" name="id" value="{{teacher.id}}">
 
           <div class="botoes">
-            <button type="submit">Salvar</button>
+            <button type="submit" onclick="ValidadeValues(event)">Salvar</button>
 
           </form>
 
-          <form id="form-delete" action="/teachers?_method=DELETE" method="post">
+          <form id="form-delete" action="/delete?_method=DELETE" method="post">
             <input type="hidden" name="id" value="{{teacher.id}}">
             <button type="submit">Deletar</button>
           </div>

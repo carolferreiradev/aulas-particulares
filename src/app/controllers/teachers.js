@@ -31,31 +31,36 @@ module.exports = {
     return res.render('teachers/create')
   },
   async post(req, res) {
-    const dados = Object.keys(req.body)
+    try {
+      const dados = Object.keys(req.body)
 
-    for (dado of dados) {
-      if (req.body[dado] == "") {
-        return res.send('Preencha todos os dados')
+      for (dado of dados) {
+        if (req.body[dado] == "") {
+          return res.send('Preencha todos os dados')
+        }
       }
+
+      let { avatar_url, name, birth_date, education_level, class_type, subjects_taught, created_at } = req.body
+
+      birth_date = date(birth_date).iso,
+        education_level = graduation(education_level),
+        created_at = date(Date.now()).iso
+
+      const teacher = await Teacher.create({
+        avatar_url,
+        name,
+        birth_date,
+        education_level,
+        class_type,
+        subjects_taught,
+        created_at
+      })
+
+      return res.render('create-edit-delete/create-edit')
+    } catch (error) {
+      console.log(error)
+      return res.render('create-edit-delete/error')
     }
-
-    let { avatar_url, name, birth_date, education_level, class_type, subjects_taught, created_at } = req.body
-
-    birth_date = date(birth_date).iso,
-      education_level = graduation(education_level),
-      created_at = date(Date.now()).iso
-
-    const teacher = await Teacher.create({
-      avatar_url,
-      name,
-      birth_date,
-      education_level,
-      class_type,
-      subjects_taught,
-      created_at
-    })
-
-    return res.redirect(`/teachers/${teacher}`)
 
   },
   show(req, res) {
@@ -79,33 +84,44 @@ module.exports = {
     })
   },
   async update(req, res) {
-    const dados = Object.keys(req.body)
+    try {
+      const dados = Object.keys(req.body)
 
-    for (dado of dados) {
-      if (req.body[dado] == "") {
-        return res.send('Preencha todos os dados')
+      for (dado of dados) {
+        if (req.body[dado] == "") {
+          return res.send('Preencha todos os dados')
+        }
       }
+
+      let { avatar_url, name, birth_date, education_level, class_type, subjects_taught, id } = req.body
+
+      birth_date = date(birth_date).iso
+      education_level = graduation(education_level)
+
+      await Teacher.update(id, {
+        avatar_url,
+        name,
+        birth_date,
+        education_level,
+        class_type,
+        subjects_taught
+      })
+
+      return res.render('create-edit-delete/create-edit')
+    } catch (error) {
+      console.log(error)
+      return res.render('create-edit-delete/error')
     }
-
-    let { avatar_url, name, birth_date, education_level, class_type, subjects_taught, id } = req.body
-
-    birth_date = date(birth_date).iso
-    education_level = graduation(education_level)
-
-    await Teacher.update(id, {
-      avatar_url,
-      name,
-      birth_date,
-      education_level,
-      class_type,
-      subjects_taught
-    })
-
-    return res.redirect(`/teachers/${id}`)
 
   },
   async delete(req, res) {
-    await Teacher.delete(req.body.id)
-    return res.redirect('/teachers')
+    try {
+      await Teacher.delete(req.body.id)
+      return res.render('create-edit-delete/delete')
+    } catch (error) {
+      console.log(error)
+      return res.render('create-edit-delete/error')
+    }
+
   }
 }

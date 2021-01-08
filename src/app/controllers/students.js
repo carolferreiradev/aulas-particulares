@@ -31,37 +31,41 @@ module.exports = {
     })
   },
   async post(req, res) {
-    const dados = Object.keys(req.body)
+    try {
+      const dados = Object.keys(req.body)
 
-    for (dado of dados) {
-      if (req.body[dado] == "") {
-        return res.send('Preencha todos os dados')
+      for (dado of dados) {
+        if (req.body[dado] == "") {
+          return res.send('Preencha todos os dados')
+        }
       }
+
+      let { avatar_url, name, nascimento, email, ano_escolar, carga_horaria, teacher } = req.body
+
+      nascimento = date(nascimento).iso,
+        ano_escolar = schoolYear(ano_escolar)
+      teacher_id = teacher
+
+      const student = await Student.create({
+        avatar_url,
+        name,
+        nascimento,
+        email,
+        ano_escolar,
+        carga_horaria,
+        teacher_id
+      })
+      return res.render('create-edit-delete/create-edit')
+    } catch (error) {
+      console.log(error)
+      return res.render('create-edit-delete/error')
     }
-
-    let { avatar_url, name, nascimento, email, ano_escolar, carga_horaria, teacher } = req.body
-
-    nascimento = date(nascimento).iso,
-      ano_escolar = schoolYear(ano_escolar)
-    teacher_id = teacher
-
-    const student = await Student.create({
-      avatar_url,
-      name,
-      nascimento,
-      email,
-      ano_escolar,
-      carga_horaria,
-      teacher_id
-    })
-    return res.redirect(`/students/${student}`)
 
   },
   show(req, res) {
     Student.find(req.params.id, function (student) {
       if (!student) return res.send('Aluno não encontrado')
 
-      console.log(student.nascimento)
       student.nascimento = age(student.nascimento)
 
       return res.render('students/show', { student })
@@ -83,35 +87,44 @@ module.exports = {
     })
   },
   async update(req, res) {
-    const dados = Object.keys(req.body)
+    try {
+      const dados = Object.keys(req.body)
 
-    for (dado of dados) {
-      if (req.body[dado] == "") {
-        return res.send('Preencha todos os dados')
+      for (dado of dados) {
+        if (req.body[dado] == "") {
+          return res.send('Preencha todos os dados')
+        }
       }
+
+      let { id, avatar_url, name, nascimento, email, ano_escolar, carga_horaria, teacher } = req.body
+
+      nascimento = date(nascimento).iso
+      ano_escolar = schoolYear(ano_escolar)
+      teacher_id = teacher
+
+      await Student.update(id, {
+        avatar_url,
+        name,
+        nascimento,
+        email,
+        ano_escolar,
+        carga_horaria,
+        teacher_id
+      })
+      return res.render('create-edit-delete/create-edit')
+    } catch (error) {
+      console.log(error)
+      return res.render('create-edit-delete/error')
     }
-
-    let { id, avatar_url, name, nascimento, email, ano_escolar, carga_horaria, teacher } = req.body
-
-    nascimento = date(nascimento).iso
-    ano_escolar = schoolYear(ano_escolar)
-    teacher_id = teacher
-
-    await Student.update(id, {
-      avatar_url,
-      name,
-      nascimento,
-      email,
-      ano_escolar,
-      carga_horaria,
-      teacher_id
-    })
-
-    return res.redirect(`/students/${id}`)
 
   },
   async delete(req, res) {
-    await Student.delete(req.body.id)
-    return res.redirect('/students')
+    try {
+      await Student.delete(req.body.id)
+      return res.render('create-edit-delete/delete')
+    } catch (error) {
+      console.log(error)
+      return res.render('create-edit-delete/error')
+    }
   },
 }

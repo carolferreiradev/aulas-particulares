@@ -14,11 +14,11 @@
                     <input type="hidden" name="id" value="{{student.id}}">
 
                     <div class="botoes">
-                        <button type="submit">Salvar</button>
+                        <button type="submit" onclick="ValidadeValues(event)">Salvar</button>
 
                     </form>
 
-                    <form id="form-delete" action="/students?_method=DELETE" method="post">
+                    <form id="form-delete" action="/delete?_method=DELETE" method="post">
                         <input type="hidden" name="id" value="{{student.id}}">
                         <button type="submit">Deletar</button>
                     </div>
