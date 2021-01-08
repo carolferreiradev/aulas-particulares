@@ -70,3 +70,21 @@ const pagination = document.querySelector('.pagination')
 if(pagination){
     createPaginationOnScreen(pagination)
 }
+
+
+// MENSAGENS DE AVISO AO USUÁRIO DE CAMPO SEM PREENCHIMENTO
+function ValidadeValues(event){
+    const fields =  document.querySelectorAll('.item input', '.item select', '.item')
+
+    for(field of fields){
+       if(field.value == ""){
+          const message = document.createElement('div')
+          message.classList.add('messages')
+          message.classList.add('error')
+          message.style.position ='fixed'
+          message.innerHTML = "Todos os campos são de preenchimento obrigatório!"
+          document.querySelector('body').append(message)
+          event.preventDefault()
+       }
+    }
+}

@@ -119,8 +119,7 @@ header {
     text-transform: uppercase;
 }
 
-.detalhes .item span,
-.span-atuacao {
+.detalhes .item span, .span-atuacao {
     background-color: var(--secondary-color);
     padding: 8px 16px;
     font-size: 12px;
@@ -232,11 +231,12 @@ table thead tr, tbody tr td {
     color: #555;
     font-size: 16px;
 }
-thead tr th{
-text-align: center;
+
+thead tr th {
+    text-align: center;
 }
-.btn-index,
-.botao-create{
+
+.btn-index, .botao-create {
     background-color: var(--primary-color);
     text-decoration: none;
     color: white;
@@ -245,12 +245,13 @@ text-align: center;
     font-size: 16px;
 }
 
-tbody tr td:first-child{
+tbody tr td:first-child {
     display: grid;
     grid-template-columns: 64px 1fr;
     align-items: center;
 }
-tbody tr td span{
+
+tbody tr td span {
     width: 40px;
     height: 40px;
     background-size: cover;
@@ -259,18 +260,19 @@ tbody tr td span{
     border: 1px;
 }
 
-tbody tr td .span-atuacao{
+tbody tr td .span-atuacao {
     display: inline;
-    
-}
-td, th{
-   border-bottom: 1px solid rgb(199, 199, 199);
 }
 
-tbody tr:last-child td{
+td, th {
+    border-bottom: 1px solid rgb(199, 199, 199);
+}
+
+tbody tr:last-child td {
     border-bottom: none;
 }
-.botao-create{
+
+.botao-create {
     display: block;
     text-align: center;
     width: 40px;
@@ -278,53 +280,85 @@ tbody tr:last-child td{
 }
 
 /* FILTROS */
-.header_teacher{
+
+.header_teacher {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
     margin-bottom: 32px;
 }
 
-.header_teacher form{
+.header_teacher form {
     display: grid;
     grid-template-columns: 1fr 100px;
     align-items: center;
     column-gap: 10px;
 }
-.header_teacher form input{
+
+.header_teacher form input {
     border: 1px solid #eee;
     padding: 10px;
     outline: none;
     align-items: center;
     border-radius: 8px;
-
 }
-.header_teacher form button{
+
+.header_teacher form button {
     text-align: center;
     margin: 0;
 }
 
 /*PAGINACAO*/
-.container{
+
+.container {
     display: grid;
     grid-template: 64px 1fr 16px / 1fr;
 }
-.container .header_teacher{
+
+.container .header_teacher {
     margin: 0;
     align-self: start;
 }
-.container .pagination{
+
+.container .pagination {
     margin: 0;
     align-self: end;
     justify-self: center;
 }
-.pagination a,
-.pagination span{
+
+.pagination a, .pagination span {
     color: var(--primary-color);
     text-decoration: none;
     margin-right: 24px;
 }
-.pagination a:hover{
+
+.pagination a:hover {
     filter: brightness(0.3);
     border-bottom: 1px solid var(--primary-color);
+}
+
+/* MENSAGENS AO USUÁRIO */
+
+.messages {
+    top: 0;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    padding: 2rem 1rem;
+    width: 100%;
+    color: white;
+    font-size: 18px;
+    opacity: 1;
+    animation: fadeMessage 400ms 3s ease-in forwards;
+}
+
+.error {
+    background-color: rgb(156, 15, 15);
+}
+
+@keyframes fadeMessage {
+    to {
+        top: -50%;
+        opacity: 0;
+    }
 }
